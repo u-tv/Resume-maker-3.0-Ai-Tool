@@ -2,17 +2,16 @@ name = "resume-master-ai"
 main = "functions/upload.js"
 compatibility_date = "2024-01-01"
 
-# यह आपके KV Namespace को बांधता है (100% सही ID)
+# यह आपके KV Namespace को बांधता है
 [[kv_namespaces]]
 binding = "MY_KV"
 id = "de9fa6e9800a45e9a5d5ad8c24cbe3fd"
 
-# यह आपके D1 Database को बांधता है (100% सही ID)
+# यह आपके D1 Database को बांधता है
 [[d1_databases]]
 binding = "DB"
 database_name = "u-tv"
 database_id = "16127660-ca97-4972-a7d1-97e9620b1271"
 
-# ---------- यह एक लाइन आपके एरर को फिक्स करेगी ----------
-# यह बताती है कि आपकी सारी स्टैटिक फाइलें (index.html, sw.js) रूट फोल्डर में हैं
+# यह बताती है कि आपकी सारी स्टैटिक फाइलें रूट फोल्डर में हैं
 pages_build_output_dir = "."
