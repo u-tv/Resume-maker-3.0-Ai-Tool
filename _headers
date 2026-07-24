@@ -1,0 +1,8 @@
+# _headers — सही MIME Type और Cache Control
+
+/*                              # सभी फाइलों के लिए
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  X-Robots-Tag: index, follow
