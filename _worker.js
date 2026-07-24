@@ -1,5 +1,6 @@
 // _worker.js — Resume Master 3.0 AI Tool
 // 7 APIs: Rewind AI, Groq, OpenRouter, Gemini, DuckDuckGo, OpenAI-Free, HuggingFace
+// Root (/) Fix — White Page ठीक करने के लिए
 
 export default {
   async fetch(request, env, ctx) {
@@ -19,7 +20,166 @@ export default {
 
     try {
       // ============================================================
-      // AI Generate — 7 APIs (Rewind + 6 others)
+      // ROOT (/) — index.html लोड करने के लिए (White Page Fix)
+      // ============================================================
+      if (path === '/' || path === '') {
+        // Cloudflare Pages अपने आप index.html serve करता है
+        // हम बस 200 OK रिटर्न करते हैं ताकि वह अपना काम कर सके
+        return new Response(null, { status: 200, headers: CORS_HEADERS });
+      }
+
+      // ============================================================
+      // 1. Resume Save (KV)
+      // ============================================================
+      if (path === '/api/resume/save' && request.method === 'POST') {
+        const data = await request.json();
+        const { userId, resumeData, title } = data;
+
+        const resumeId = `resume_${Date.now()}_${Math.random().toString(36).substring(2,8)}`;
+        const timestamp = new Date().toISOString();
+
+        await kv.put(`resumes:${resumeId}`, JSON.stringify({
+          id: resumeId,
+          title: title || 'Untitled Resume',
+          data: resumeData,
+          userId: userId || 'guest',
+          createdAt: timestamp,
+          updatedAt: timestamp,
+          views: 0,
+          downloads: 0,
+          atsScore: calculateATSScore(resumeData)
+        }));
+
+        const userKey = `user:${userId || 'guest'}:resumes`;
+        let userList = await kv.get(userKey);
+        let resumes = userList ? JSON.parse(userList) : [];
+        resumes.push(resumeId);
+        if (resumes.length > 50) resumes = resumes.slice(-50);
+        await kv.put(userKey, JSON.stringify(resumes));
+
+        return new Response(JSON.stringify({ success: true, id: resumeId }), {
+          headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }
+        });
+      }
+
+      // ============================================================
+      // 2. Resume Load (KV)
+      // ============================================================
+      if (path === '/api/resume/load' && request.method === 'GET') {
+        const id = url.searchParams.get('id');
+        if (!id) return new Response(JSON.stringify({ error: 'ID required' }), { status: 400 });
+
+        const data = await kv.get(`resumes:${id}`);
+        if (!data) return new Response(JSON.stringify({ error: 'Resume not found' }), { status: 404 });
+
+        const resume = JSON.parse(data);
+        resume.views = (resume.views || 0) + 1;
+        await kv.put(`resumes:${id}`, JSON.stringify(resume));
+
+        return new Response(JSON.stringify({ success: true, data: resume }), {
+          headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }
+        });
+      }
+
+      // ============================================================
+      // 3. Resume List (KV)
+      // ============================================================
+      if (path === '/api/resume/list' && request.method === 'GET') {
+        const userId = url.searchParams.get('userId') || 'guest';
+        const userKey = `user:${userId || 'guest'}:resumes`;
+        const userList = await kv.get(userKey);
+        const resumeIds = userList ? JSON.parse(userList) : [];
+
+        const resumes = [];
+        for (const id of resumeIds) {
+          const data = await kv.get(`resumes:${id}`);
+          if (data) {
+            const res = JSON.parse(data);
+            resumes.push({
+              id: res.id,
+              title: res.title,
+              atsScore: res.atsScore,
+              createdAt: res.createdAt,
+              views: res.views
+            });
+          }
+        }
+
+        return new Response(JSON.stringify({ success: true, resumes }), {
+          headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }
+        });
+      }
+
+      // ============================================================
+      // 4. Resume Delete (KV)
+      // ============================================================
+      if (path === '/api/resume/delete' && request.method === 'DELETE') {
+        const id = url.searchParams.get('id');
+        const userId = url.searchParams.get('userId') || 'guest';
+        if (!id) return new Response(JSON.stringify({ error: 'ID required' }), { status: 400 });
+
+        await kv.delete(`resumes:${id}`);
+
+        const userKey = `user:${userId}:resumes`;
+        const userList = await kv.get(userKey);
+        if (userList) {
+          let resumes = JSON.parse(userList);
+          resumes = resumes.filter(resId => resId !== id);
+          await kv.put(userKey, JSON.stringify(resumes));
+        }
+
+        return new Response(JSON.stringify({ success: true }), {
+          headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }
+        });
+      }
+
+      // ============================================================
+      // 5. Share Link (KV)
+      // ============================================================
+      if (path === '/api/share' && request.method === 'POST') {
+        const { resumeId } = await request.json();
+        if (!resumeId) return new Response(JSON.stringify({ error: 'Resume ID required' }), { status: 400 });
+
+        const shareId = `share_${Date.now()}_${Math.random().toString(36).substring(2,10)}`;
+        await kv.put(`shares:${shareId}`, JSON.stringify({
+          resumeId,
+          createdAt: new Date().toISOString(),
+          views: 0
+        }));
+
+        const shareLink = `/${shareId}`;
+        return new Response(JSON.stringify({ success: true, shareId, shareLink }), {
+          headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }
+        });
+      }
+
+      // ============================================================
+      // 6. Share Load (KV)
+      // ============================================================
+      if (path === '/api/share' && request.method === 'GET') {
+        const shareId = url.searchParams.get('id');
+        if (!shareId) return new Response(JSON.stringify({ error: 'Share ID required' }), { status: 400 });
+
+        const shareData = await kv.get(`shares:${shareId}`);
+        if (!shareData) return new Response(JSON.stringify({ error: 'Share not found' }), { status: 404 });
+
+        const share = JSON.parse(shareData);
+        share.views = (share.views || 0) + 1;
+        await kv.put(`shares:${shareId}`, JSON.stringify(share));
+
+        const resumeData = await kv.get(`resumes:${share.resumeId}`);
+        if (!resumeData) return new Response(JSON.stringify({ error: 'Resume not found' }), { status: 404 });
+
+        const resume = JSON.parse(resumeData);
+        delete resume.data;
+
+        return new Response(JSON.stringify({ success: true, resume, share }), {
+          headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }
+        });
+      }
+
+      // ============================================================
+      // 7. AI Generate — 7 APIs (Rewind + 6 others)
       // ============================================================
       if (path === '/api/ai/generate' && request.method === 'POST') {
         const { prompt } = await request.json();
@@ -39,7 +199,7 @@ export default {
 
         // --- 1. Try Rewind AI (Keyed) ---
         try {
-          const rewindKey = env.REWIND_API_KEY;
+          const rewindKey = env.REWIND_AI_API_KEY;
           if (rewindKey) {
             const rewindRes = await fetch('https://api.rewind.ai/v1/chat/completions', {
               method: 'POST',
@@ -60,7 +220,7 @@ export default {
               usedApi = 'Rewind AI';
             }
           }
-        } catch (e) { /* Rewind failed — move to next */ }
+        } catch (e) { /* Rewind failed */ }
 
         // --- 2. Try Groq (Keyed) ---
         if (!content) {
@@ -119,7 +279,7 @@ export default {
         // --- 4. Try Gemini (Keyed) ---
         if (!content) {
           try {
-            const geminiKey = env.GEMINI_API_KEY;
+            const geminiKey = env.GOOGLE_GEMINI_API_KEY;
             if (geminiKey) {
               const geminiRes = await fetch(
                 `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${geminiKey}`,
@@ -208,19 +368,15 @@ export default {
       }
 
       // ============================================================
-      // Resume Endpoints (Save, Load, Share, etc.) — पिछले जैसे ही
-      // ============================================================
-
-      // ============================================================
-      // Health Check
+      // 8. Health Check
       // ============================================================
       if (path === '/api/health' && request.method === 'GET') {
         return new Response(JSON.stringify({
           status: 'ok',
-          rewind: !!env.REWIND_API_KEY,
+          rewind: !!env.REWIND_AI_API_KEY,
           groq: !!env.GROQ_API_KEY,
           openrouter: !!env.OPENROUTER_API_KEY,
-          gemini: !!env.GEMINI_API_KEY,
+          gemini: !!env.GOOGLE_GEMINI_API_KEY,
           opensource: 'duckduckgo, openai-free, huggingface'
         }), {
           headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' }
@@ -228,15 +384,26 @@ export default {
       }
 
       // ============================================================
-      // Root — Serve index.html
+      // 9. 404 — Not Found
       // ============================================================
-      if (path === '/' || path === '') {
-        return new Response(null, { status: 200, headers: CORS_HEADERS });
-      }
-
       return new Response(JSON.stringify({ error: 'Not found' }), { status: 404, headers: CORS_HEADERS });
+
     } catch (error) {
       return new Response(JSON.stringify({ error: error.message }), { status: 500, headers: CORS_HEADERS });
     }
   }
 };
+
+// ============================================================
+// Helper Function
+// ============================================================
+
+function calculateATSScore(data) {
+  let score = 0;
+  if (data.fullName) score += 10;
+  if (data.email) score += 10;
+  if (data.summary && data.summary.length > 50) score += 20;
+  if (data.experience && data.experience.length > 0) score += 30;
+  if (data.skills && data.skills.split(',').length > 3) score += 30;
+  return Math.min(score, 100);
+}
