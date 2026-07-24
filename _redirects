@@ -1,0 +1,7 @@
+# _redirects — 404 को index.html पर भेजें (SPA Support)
+
+# अगर कोई फाइल नहीं मिलती, तो index.html पर भेजें
+/* /index.html 200
+
+# अगर आप किसी पुराने URL को नए पर रीडायरेक्ट करना चाहते हैं
+# /old-page /new-page 301
