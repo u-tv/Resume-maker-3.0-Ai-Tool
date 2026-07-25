@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- ============================================================
+         HOMEPAGE
+         ============================================================ -->
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- ============================================================
+         STATIC PAGES (Legal & Info)
+         ============================================================ -->
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/about/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/privacy/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/terms/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/security/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/disclaimer/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- ============================================================
+         TEMPLATE PAGES (6 Main Templates)
+         ============================================================ -->
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/professional/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/modern/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/executive/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/minimal/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/creative/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/ats/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- ============================================================
+         FEATURE PAGES
+         ============================================================ -->
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/ai-assistant/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/ats-checker/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/export-center/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/analytics/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/tools/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- ============================================================
+         GUIDE / BLOG PAGES
+         ============================================================ -->
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/guides/resume-writing-tips/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/guides/interview-preparation/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/guides/linkedin-optimization/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/guides/ats-friendly-resume/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- ============================================================
+         DYNAMIC RESUME PAGES (Examples)
+         Users will have their own URLs like:
+         /resume/{user-id}/
+         ============================================================ -->
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/resume/sample-1/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/resume/sample-2/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/resume/sample-3/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- ============================================================
+         EXTRA TEMPLATES (10+ Premium)
+         ============================================================ -->
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/corporate/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/tech/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/elegant/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/bold/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/academic/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://resume-maker-3-0-ai-tool.pages.dev/templates/startup/</loc>
+        <lastmod>2026-01-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+</urlset>
